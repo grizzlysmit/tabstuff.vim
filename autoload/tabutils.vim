@@ -103,7 +103,14 @@ function TabNewFile()
         let filename = Joinpath(dir, input("file name: "))
     else
         let dir = browsedir("choose a directory for new file: ", getcwd())
-        let filename = Joinpath(dir, inputdialog("Name for new file: ", ""))
+        if dir == ""
+            finish
+        endif
+        let basefilename = inputdialog("Name for new file: ", "", v:null)
+        if basefilename == v:null
+            finish
+        endif
+        let filename = Joinpath(dir, basefilename)
     endif
     exe ":tabnew " . filename
 endfunction

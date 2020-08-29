@@ -1,5 +1,5 @@
 "Author: Francis Grizzly Smit
-" License:  GPLv3
+" License:  GPLv3 or above
 "Created: 2015-12-05
 
 if exists('g:loaded_tabstuff')
