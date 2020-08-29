@@ -104,11 +104,11 @@ function TabNewFile()
     else
         let dir = browsedir("choose a directory for new file: ", getcwd())
         if dir == ""
-            finish
+            return
         endif
         let basefilename = inputdialog("Name for new file: ", "", v:null)
         if basefilename == v:null
-            finish
+            return
         endif
         let filename = Joinpath(dir, basefilename)
     endif
