@@ -2,13 +2,10 @@
 " License:  GPLv3
 "Created: 2015-12-07
 
-if exists("g:loaded_autoload_tabutils")
+if exists("g:loaded_autoload_tabutils") || not has('gui_running')
     finish
 endif
 let g:loaded_autoload_tabutils = 1
-if not has("gui_running")
-    finish
-endif
 
 let s:sfile = expand('<sfile>:p')
 "call vlutils#Init()
