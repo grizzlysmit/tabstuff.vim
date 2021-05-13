@@ -6,17 +6,16 @@ if exists('g:loaded_tabstuff')
     finish
 endif
 
-if not has("gui_running")
-    finish
-endif
-
 let g:loaded_tabstuff = 1
 
-call tabutils#init()
+if has("gui_running")
 
-call tabutils#toolbar()
+    call tabutils#init()
 
-command TabNewFile call TabNewFile()
+    call tabutils#toolbar()
 
-call tabutils#menus()
+    command TabNewFile call TabNewFile()
+
+    call tabutils#menus()
+endif
 
