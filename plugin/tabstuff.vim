@@ -5,12 +5,12 @@
 if exists('g:loaded_tabstuff')
     finish
 endif
-let g:loaded_tabstuff = 1
-
 
 if not has("gui_running")
     finish
 endif
+
+let g:loaded_tabstuff = 1
 
 call tabutils#init()
 
