@@ -8,6 +8,10 @@ endif
 let g:loaded_tabstuff = 1
 
 
+if not exists("&Tools")
+    finish
+endif
+
 call tabutils#init()
 
 call tabutils#toolbar()
