@@ -8,7 +8,7 @@ endif
 let g:loaded_tabstuff = 1
 
 
-if not exists("&Tools")
+if not has("gui_running")
     finish
 endif
 

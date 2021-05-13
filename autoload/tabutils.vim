@@ -46,7 +46,7 @@ endfunction
 let rtp_bak = &runtimepath
 let &runtimepath = PosixPath(tabstuf_dir) . ',' . &runtimepath
 function tabutils#toolbar()
-    if not exists("&Tools")
+    if not has("gui_running")
         finish
     endif
     "let rtp_bak = &runtimepath
@@ -119,7 +119,7 @@ function TabNewFile()
 endfunction
 
 function tabutils#menus()
-    if not exists("&Tools")
+    if not has("gui_running")
         finish
     endif
     anoremenu Tab.First\ Tab :tabfirst<cr>
