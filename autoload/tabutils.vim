@@ -6,6 +6,9 @@ if exists("g:loaded_autoload_tabutils")
     finish
 endif
 let g:loaded_autoload_tabutils = 1
+if not has("gui_running")
+    finish
+endif
 
 let s:sfile = expand('<sfile>:p')
 "call vlutils#Init()
@@ -46,9 +49,6 @@ endfunction
 let rtp_bak = &runtimepath
 let &runtimepath = PosixPath(tabstuf_dir) . ',' . &runtimepath
 function tabutils#toolbar()
-    if not has("gui_running")
-        finish
-    endif
     "let rtp_bak = &runtimepath
     "let &runtimepath = PosixPath(tabstuf_dir) . ',' . &runtimepath
 
@@ -119,9 +119,6 @@ function TabNewFile()
 endfunction
 
 function tabutils#menus()
-    if not has("gui_running")
-        finish
-    endif
     anoremenu Tab.First\ Tab :tabfirst<cr>
     anoremenu Tab.Next\ Tab :tabnext<cr>
     anoremenu Tab.Previous\ Tab :tabprevious<cr>
