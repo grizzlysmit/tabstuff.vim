@@ -5,9 +5,6 @@
 if exists("g:loaded_autoload_tabutils")
     finish
 endif
-if not has("gui_running")
-    finish
-endif
 let g:loaded_autoload_tabutils = 1
 
 let s:sfile = expand('<sfile>:p')
