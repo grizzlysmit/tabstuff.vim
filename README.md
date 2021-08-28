@@ -25,6 +25,18 @@ call vundle#begin()
 and 
 call vundle#end()            " required
 
+## i.e.
+
+```
+call vundle#begin()
+"Tabstuff 
+" ...
+Plugin 'grizzlysmit/tabstuff.vim'
+" ...
+" ...
+call vundle#end()            " required
+```
+
 if you do not have [Vundel](https://github.com/VundleVim/Vundle.vim) installed [go here for instuctions](https://github.com/VundleVim/Vundle.vim#quick-start)
 
 
