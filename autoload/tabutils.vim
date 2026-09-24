@@ -36,51 +36,68 @@ function! PosixPath(sPath) "{{{2
         return a:sPath
     endif
 endfunction
-let tabstuf_dir = Joinpath(fnamemodify(fnamemodify(s:sfile, ':h'), ':h'), '_tabstuff')
-let tabstuff_bitmapsdir = Joinpath(tabstuf_dir, 'bitmaps')
+let g:tabstuf_dir = Joinpath(fnamemodify(fnamemodify(s:sfile, ':h'), ':h'), '_tabstuff')
+let g:tabstuff_bitmapsdir = Joinpath(tabstuf_dir, 'bitmaps')
 
 function tabutils#init()
     return 1
 endfunction
 
 let rtp_bak = &runtimepath
-let &runtimepath = PosixPath(tabstuf_dir) . ',' . &runtimepath
+let &runtimepath = PosixPath(g:tabstuf_dir) . ',' . &runtimepath
+"call sign_define('ImgTest',  {'icon' : Joinpath(tabstuff_bitmapsdir, 'open-in-tabs.bmp')})
 function tabutils#toolbar()
     "let rtp_bak = &runtimepath
     "let &runtimepath = PosixPath(tabstuf_dir) . ',' . &runtimepath
+    "let &runtimepath = PosixPath(g:tabstuf_dir) . ',' . &runtimepath
 
+    "sign place 1 line=1 name=ImgTest
+    "let id = sign_place(0, '', 'ImgTest', 'gvim-build.sh', {'lnum' : 10})
     "anoremenu icon=$HOME/.vim/_tabstuff/bitmaps/open-in-tabs.xpm 1.15 ToolBar.OpenInNewTab :browse tabnew<cr>
-    anoremenu <silent>  icon=open-in-tabs 1.15 ToolBar.OpenInNewTab :browse tabnew<cr>
+    "anoremenu <silent>  icon=&ImgTest 1.15 ToolBar.OpenInNewTab :browse tabnew<cr>
+    let g:open_in_new_tab_icon = Joinpath(g:tabstuff_bitmapsdir, 'open-in-tabs.bmp')
+    let g:open_in_new_tab_str = printf("anoremenu <silent>  icon=%s 1.15 ToolBar.OpenInNewTab :browse tabnew<cr>", g:open_in_new_tab_icon)
+    exe g:open_in_new_tab_str
+    "anoremenu <silent>  icon=BuiltIn01 1.15 ToolBar.OpenInNewTab :browse tabnew<cr>
     tmenu ToolBar.OpenInNewTab Open In New Tab
-    anoremenu <silent>  icon=create-in-tabs 1.16 ToolBar.CreateInNewTab :call TabNewFile()<cr>
+    "anoremenu <silent>  icon=create-in-tabs 1.16 ToolBar.CreateInNewTab :call TabNewFile()<cr>
+    let g:create_in_tabs_icon = Joinpath(g:tabstuff_bitmapsdir, 'create-in-tabs.bmp')
+    let g:create_in_tabs_str = printf("anoremenu <silent>  icon=%s 1.16 ToolBar.CreateInNewTab :call TabNewFile()<cr>", g:create_in_tabs_icon)
+    exe g:create_in_tabs_str
     tmenu ToolBar.CreateInNewTab Create File In New Tab
     anoremenu <silent>  1.281 ToolBar.-TabSep- :
     "anoremenu <silent>  icon=$HOME/.vim/_tabstuff/bitmaps/arrow-left-double.xpm 1.282 ToolBar.TabFirst :tabfirst<cr>
-    anoremenu <silent>  icon=arrow-left-double 1.282 ToolBar.TabFirst :tabfirst<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.282 ToolBar.TabFirst :tabfirst<cr>", Joinpath(g:tabstuff_bitmapsdir, 'arrow-left-double.bmp'))
     tmenu ToolBar.TabFirst Goto First Tab
-    anoremenu <silent>  icon=arrow-right 1.283 ToolBar.TabNext :tabnext<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.283 ToolBar.TabNext :tabnext<cr>", Joinpath(g:tabstuff_bitmapsdir, 'arrow-right.bmp'))
     tmenu ToolBar.TabNext Goto Next Tab 
-    anoremenu <silent>  icon=arrow-left 1.284 ToolBar.TabPrevious :tabprevious<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.284 ToolBar.TabPrevious :tabprevious<cr>", Joinpath(g:tabstuff_bitmapsdir, 'arrow-left.bmp'))
     tmenu ToolBar.TabPrevious Goto Previous Tab
-    anoremenu <silent>  icon=arrow-right-double 1.285 ToolBar.TabLast :tablast<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.285 ToolBar.TabLast :tablast<cr>", Joinpath(g:tabstuff_bitmapsdir, 'arrow-right-double.bmp'))
     tmenu ToolBar.TabLast Goto Last Tab
     anoremenu <silent>  1.286 ToolBar.-TabSep2- :
-    anoremenu <silent>  icon=dialog-close 1.287 ToolBar.TabClose :tabclose<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.287 ToolBar.TabClose :tabclose<cr>", Joinpath(g:tabstuff_bitmapsdir, 'dialog-close.bmp'))
     tmenu ToolBar.TabClose Close Current Tab
     anoremenu <silent>  1.288 ToolBar.-TabSep3- :
-    anoremenu <silent>  icon=tabs 1.289 ToolBar.TabOpenAllInTabs :tab sball<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.289 ToolBar.TabOpenAllInTabs :tab sball<cr>", Joinpath(g:tabstuff_bitmapsdir, 'tabs.bmp'))
     tmenu ToolBar.TabOpenAllInTabs Open All Buffers In Tabs
-    anoremenu <silent>  icon=tabmove-start 1.290 ToolBar.TabMoveStart :tabmove 0<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.290 ToolBar.TabMoveStart :tabmove 0<cr>", Joinpath(g:tabstuff_bitmapsdir, 'tabmove-start.bmp'))
     tmenu ToolBar.TabMoveStart Tab Move Start
-    anoremenu <silent>  icon=tabmove-left 1.291 ToolBar.TabMoveBack :exe 'tabmove' (tabpagenr()-2)<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.291 ToolBar.TabMoveBack :exe 'tabmove' (tabpagenr()-2)<cr>", Joinpath(g:tabstuff_bitmapsdir, 'tabmove-left.bmp'))
     tmenu ToolBar.TabMoveBack Tab Move Back
-    anoremenu <silent>  icon=tabmove-right 1.292 ToolBar.TabMoveForward :exe 'tabmove' (tabpagenr()+1)<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.292 ToolBar.TabMoveForward :exe 'tabmove' (tabpagenr()+1)<cr>", Joinpath(g:tabstuff_bitmapsdir, 'tabmove-right.bmp'))
     tmenu ToolBar.TabMoveForward Tab Move Forward
-    anoremenu <silent>  icon=tabmove-end 1.293 ToolBar.TabMove :tabmove<cr>
+    exe printf("anoremenu <silent>  icon=%s 1.293 ToolBar.TabMove :tabmove<cr>", Joinpath(g:tabstuff_bitmapsdir, 'tabmove-end.bmp'))
     tmenu ToolBar.TabMove Tab Move End
-    anoremenu <silent>  icon=help 1.294 ToolBar.Tab\ Search\ Help :call Tabhelp()<cr>
+    anoremenu <silent>  1.294 ToolBar.-TabSep4- :
+    let g:tab_search_help_icon = Joinpath(g:tabstuff_bitmapsdir, 'help.bmp')
+    let g:tab_search_help_str  = printf("anoremenu <silent>  icon=%s 1.295 ToolBar.Tab\\ Search\\ Help :call Tabhelp()<cr>", g:tab_search_help_icon)
+    exe g:tab_search_help_str
     tmenu ToolBar.Tab\ Search\ Help Tab Search Help
-    anoremenu <silent>  icon=helpgrep 1.294 ToolBar.Tab\ Search\ HelpGrep :call TabhelpGrep()<cr>
+    let g:tab_search_helpgrep_icon = Joinpath(g:tabstuff_bitmapsdir, 'helpgrep.bmp')
+    let g:tab_search_helpgrep_str  = printf("anoremenu <silent>  icon=%s 1.296 ToolBar.Tab\\ Search\\ HelpGrep :call TabhelpGrep()<cr>", g:tab_search_helpgrep_icon)
+    exe g:tab_search_helpgrep_str
+    "exe printf("anoremenu <silent>  icon=%s 1.296 ToolBar.Tab\ Search\ HelpGrep :call TabhelpGrep()<cr>", Joinpath(g:tabstuff_bitmapsdir, 'helpgrep.bmp'))
     tmenu ToolBar.Tab\ Search\ HelpGrep Tab Search HelpGrep
     "let &runtimepath = rtp_bak
     return 1
